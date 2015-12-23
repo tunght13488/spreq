@@ -1,0 +1,33 @@
+app:
+  image: busybox
+  volumes:
+    - ./app:/var/www/app
+  tty: true
+
+nginx:
+  build: docker/nginx
+  links:
+    - php
+  volumes_from:
+    - app
+  environment:
+    DOCUMENT_ROOT: /var/www/app
+    INDEX_FILE: index.php
+    PHP_FPM_SOCKET: php:9000
+    VIRTUAL_HOST: spreq.dk
+
+php:
+  build: docker/php
+  working_dir: /var/www/app
+  links:
+    - mysql
+  volumes_from:
+    - app
+
+mysql:
+  image: mysql:5.7
+  environment:
+    MYSQL_ROOT_PASSWORD: noop
+    MYSQL_DATABASE: mydb
+    MYSQL_USER: dbuser
+    MYSQL_PASSWORD: dbpass
