@@ -11,14 +11,11 @@ nginx:
   volumes_from:
     - app
   environment:
-    DOCUMENT_ROOT: /var/www/app
-    INDEX_FILE: index.php
-    PHP_FPM_SOCKET: php:9000
     VIRTUAL_HOST: spreq.dk
 
 php:
   build: docker/php
-  working_dir: /var/www/app
+  working_dir: /var/www/symfony/web
   links:
     - mysql
     - redis
