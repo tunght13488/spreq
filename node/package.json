@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "socketio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tung Ha <tunght13488@gmail.com> (http://tunght.com)",
+  "license": "MIT",
+  "dependencies": {
+    "ioredis": "^1.13.1",
+    "socket.io": "^1.3.7"
+  }
+}

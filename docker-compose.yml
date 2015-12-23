@@ -1,7 +1,7 @@
 app:
   image: busybox
   volumes:
-    - ./app:/var/www/app
+    - .:/var/www
   tty: true
 
 nginx:
@@ -21,6 +21,7 @@ php:
   working_dir: /var/www/app
   links:
     - mysql
+    - redis
   volumes_from:
     - app
 
@@ -31,3 +32,18 @@ mysql:
     MYSQL_DATABASE: mydb
     MYSQL_USER: dbuser
     MYSQL_PASSWORD: dbpass
+
+redis:
+  image: redis:3.0
+
+node:
+  image: node:5.3-onbuild
+  working_dir: /var/www/node
+  links:
+    - redis
+  volumes_from:
+    - app
+  expose:
+    - 80
+  environment:
+    VIRTUAL_HOST: socket.spreq.dk
