@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libicu-dev \
     g++ \
-  && apt-get clean -q -y \
   && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure \

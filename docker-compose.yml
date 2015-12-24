@@ -22,6 +22,12 @@ php:
   volumes_from:
     - app
 
+composer:
+  build: docker/composer
+  working_dir: /var/www/symfony
+  volumes_from:
+    - app
+
 mysql:
   image: mysql:5.7
   environment:
@@ -34,8 +40,7 @@ redis:
   image: redis:3.0
 
 node:
-  image: node:5.3-onbuild
-  working_dir: /var/www/node
+  build: docker/node
   links:
     - redis
   volumes_from:
@@ -44,3 +49,4 @@ node:
     - 80
   environment:
     VIRTUAL_HOST: socket.spreq.dk
+    DOCUMENT_ROOT: /var/www/node
